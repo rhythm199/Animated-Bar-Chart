@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Equalizer Animation</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 95%;
+      height: 85%;
+      position: relative;
+      border: 5px solid #07002a;
+      background-color: #07002a;
+      verflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 5px 5px;
+      z-index: 1;
+    }
+
+    .bar {
+      flex: 1;
+      height: 50%;
+      background-color: #7448b5;
+      animation: fluctuate 4s infinite ease-in-out;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 5px 5px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .bar:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+
+    .bar:nth-child(2) {
+      background-color: #d848aa;
+      animation-delay: 0.5s;
+    }
+
+    .bar:nth-child(3) {
+      background-color: #fc6568;
+      animation-delay: 1s;
+    }
+
+    .bar:nth-child(4) {
+      background-color: #f78b6a;
+      animation-delay: 1.5s;
+    }
+
+    .bar:nth-child(5) {
+      background-color: #fbbd55;
+      animation-delay: 2s;
+    }
+
+    @keyframes fluctuate {
+      0% {
+        height: 20%;
+      }
+
+      25% {
+        height: 70%;
+      }
+
+      50% {
+        height: 40%;
+      }
+
+      75% {
+        height: 90%;
+      }
+
+      100% {
+        height: 30%;
+      }
+    }
+
+    .buttons {
+      margin-top: 50px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+    }
+
+    button.start {
+      background-color: #008a43;
+    }
+
+    button.reset {
+      background-color: #6c48f9;
+    }
+
+    button.stop {
+      background-color: #f71f0a;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <div class="buttons">
+    <button class="start">Start</button>
+    <button class="reset">Reset</button>
+    <button class="stop">Stop</button>
+  </div>
+
+  <script>
+    const bars = document.querySelectorAll('.bar');
+    const startButton = document.querySelector('.start');
+    const stopButton = document.querySelector('.stop');
+    const resetButton = document.querySelector('.reset');
+
+    let isAnimating = false;
+
+    function startAnimation() {
+      if (!isAnimating) {
+        bars.forEach(bar => {
+          bar.style.animationPlayState = 'running';
+        });
+        isAnimating = true;
+      }
+    }
+
+    function stopAnimation() {
+      bars.forEach(bar => {
+        bar.style.animationPlayState = 'paused';
+      });
+      isAnimating = false;
+    }
+
+
+    function resetBars() {
+      stopAnimation();
+      bars.forEach(bar => {
+        bar.style.animation = 'none';
+        bar.style.height = '100%';
+        setTimeout(() => {
+          bar.style.animation = '';
+          bar.style.animationPlayState = 'paused';
+        }, 50);
+      });
+    }
+
+    startButton.addEventListener('click', startAnimation);
+    stopButton.addEventListener('click', stopAnimation);
+    resetButton.addEventListener('click', resetBars);
+  </script>
+</body>
+
+</html>
