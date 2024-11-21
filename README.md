@@ -5,6 +5,7 @@
 This is a simple web application that demonstrates a bar animation effect. The bars fluctuate in height using CSS animations, with controls to start, stop, and reset the animation. The application includes three buttons: **Start**, **Stop**, and **Reset** to control the behavior of the bars.
 
 This project was created as part of an assignment for a company to test skills in **HTML**, **CSS**, and **JavaScript**.
+![Assignment](https://github.com/user-attachments/assets/ecbaf72a-be24-407d-b0b2-2806d11c14c8)
 
 ---
 
